@@ -39,10 +39,6 @@ public class AlunoDAO extends SQLiteOpenHelper{
                 sql = "ALTER TABLE alunos ADD COLUMN caminho_foto TEXT;";
                 db.execSQL(sql);
         }
-
-
-
-        //onCreate(db);
     }
 
     public void insert(Aluno aluno){
@@ -100,5 +96,14 @@ public class AlunoDAO extends SQLiteOpenHelper{
         String[] params = {aluno.getId().toString()};
 
         db.update("alunos", values, "id = ?", params);
+    }
+
+    public Boolean isAluno(String telefone){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM ALUNOS WHERE telefone = ?", new String[]{telefone});
+        int result = c.getCount();
+        c.close();
+        return result>0;
+
     }
 }
