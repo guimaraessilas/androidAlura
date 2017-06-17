@@ -37,17 +37,22 @@ public class FormularioHelper {
         aluno.setNota((double) notaRB.getNumStars());
         aluno.setTelefone(telefoneET.getText().toString());
         aluno.setSite(siteET.getText().toString());
-        aluno.setCaminhoFoto(fotoIV.getTag().toString());
+        if(fotoIV.getTag()!=null){
+            aluno.setCaminhoFoto((String)fotoIV.getTag());
+        }
+
         return aluno;
     }
 
     public void preencheFormulario(Aluno aluno) {
-        carregaImagem(aluno.getCaminhoFoto());
         nomeET.setText(aluno.getNome());
         enderecoET.setText(aluno.getEndereco());
         siteET.setText(aluno.getSite());
         telefoneET.setText(aluno.getTelefone());
         notaRB.setProgress((int) aluno.getNota().doubleValue());
+        if (aluno.getCaminhoFoto()!=null){
+            carregaImagem(aluno.getCaminhoFoto());
+        }
 
         this.aluno = aluno;
     }

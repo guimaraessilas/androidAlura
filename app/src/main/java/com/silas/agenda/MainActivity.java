@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.silas.agenda.adapter.AlunosAdapter;
 import com.silas.agenda.dao.AlunoDAO;
 import com.silas.agenda.model.Aluno;
 
@@ -127,7 +128,8 @@ public class MainActivity extends AppCompatActivity {
         List<Aluno> alunos = dao.listAlunos();
         dao.close();
 
-        ArrayAdapter<Aluno> adapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunos);
+        AlunosAdapter adapter = new AlunosAdapter(this, alunos);
+
 
         listaAlunos.setAdapter(adapter);
     }
