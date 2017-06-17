@@ -34,9 +34,10 @@ public class FormularioHelper {
     public Aluno getAluno(){
         aluno.setNome(nomeET.getText().toString());
         aluno.setEndereco(enderecoET.getText().toString());
-        aluno.setNota((double) notaRB.getNumStars());
+        aluno.setNota(Double.valueOf(notaRB.getProgress()));
         aluno.setTelefone(telefoneET.getText().toString());
         aluno.setSite(siteET.getText().toString());
+
         if(fotoIV.getTag()!=null){
             aluno.setCaminhoFoto((String)fotoIV.getTag());
         }
@@ -49,7 +50,8 @@ public class FormularioHelper {
         enderecoET.setText(aluno.getEndereco());
         siteET.setText(aluno.getSite());
         telefoneET.setText(aluno.getTelefone());
-        notaRB.setProgress((int) aluno.getNota().doubleValue());
+        notaRB.setProgress(aluno.getNota().intValue());
+
         if (aluno.getCaminhoFoto()!=null){
             carregaImagem(aluno.getCaminhoFoto());
         }

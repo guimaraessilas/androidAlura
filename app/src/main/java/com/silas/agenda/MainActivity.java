@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.provider.Browser;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,10 +20,14 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.silas.agenda.adapter.AlunosAdapter;
+import com.silas.agenda.converter.AlunoConverter;
 import com.silas.agenda.dao.AlunoDAO;
 import com.silas.agenda.model.Aluno;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class MainActivity extends AppCompatActivity {
     private ListView listaAlunos;
@@ -138,5 +143,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         carregaLista();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_lista_alunos, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.menu_enviar_notas:
+                EnviaAlunosTask enviar = new EnviaAlunosTask(this);
+                enviar.execute();
+
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
